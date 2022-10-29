@@ -213,7 +213,7 @@
 /* Custom Hero Card */
 
 #cards {
-    background-image: url(images/card-dynamic-premium.png);
+    background-image: url(/images/card-dynamic-premium.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
@@ -225,6 +225,6 @@
 
 
 #cards:hover {
-    background-image: url(images/card-dynamic-gradient.png);
+    background-image: url(/images/card-dynamic-gradient.png);
     cursor: pointer;
 }
