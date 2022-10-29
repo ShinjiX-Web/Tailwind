@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <link rel="stylesheet" href="./src/input.css">
+    <link rel="shortcut icon" href="/images/hacker.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Nate Corner</title>
+</head>
+
+<body class="bg-gray-200">
+
+    <!-- Navigation -->
+
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+            <a href="#" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                    viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">Nate Corner</span>
+            </a>
+            <nav class="md:ml-auto hidden md:flex flex-wrap items-center text-base justify-center">
+                <a href="#" class="mr-5 hover:text-gray-900">Portfolio</a>
+                <a href="#" class="mr-5 hover:text-gray-900">Services</a>
+                <a href="#" class="mr-5 hover:text-gray-900">About Us</a>
+                <a href="#" class="mr-5 hover:text-gray-900">Contact</a>
+
+                <button id="button" aria-describedby="tooltip"
+                    class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><a
+                        href="#cta">Sign In</a>
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+                <div id="tooltip" role="tooltip">Click Me
+                    <div id="arrow" data-popper-arrow></div>
+                </div>
+
+                <script src="https://unpkg.com/@popperjs/core@2"></script>
+                <script>
+                    const button = document.querySelector('#button');
+                    const tooltip = document.querySelector('#tooltip');
+
+                    const popperInstance = Popper.createPopper(button, tooltip, {
+                        modifiers: [
+                            {
+                                name: 'offset',
+                                options: {
+                                    offset: [0, 8],
+                                },
+                            },
+                        ],
+                    });
+
+                    function show() {
+                        // Make the tooltip visible
+                        tooltip.setAttribute('data-show', '');
+
+                        // Enable the event listeners
+                        popperInstance.setOptions((options) => ({
+                            ...options,
+                            modifiers: [
+                                ...options.modifiers,
+                                { name: 'eventListeners', enabled: true },
+                            ],
+                        }));
+
+                        // Update its position
+                        popperInstance.update();
+                    }
+
+                    function hide() {
+                        // Hide the tooltip
+                        tooltip.removeAttribute('data-show');
+
+                        // Disable the event listeners
+                        popperInstance.setOptions((options) => ({
+                            ...options,
+                            modifiers: [
+                                ...options.modifiers,
+                                { name: 'eventListeners', enabled: false },
+                            ],
+                        }));
+                    }
+
+                    const showEvents = ['mouseenter', 'focus'];
+                    const hideEvents = ['mouseleave', 'blur'];
+
+                    showEvents.forEach((event) => {
+                        button.addEventListener(event, show);
+                    });
+
+                    hideEvents.forEach((event) => {
+                        button.addEventListener(event, hide);
+                    });
+                </script>
+            </nav>
+
+            <!-- Hamburger Icon -->
+            <button id="menu-btn" class="block hamburger md:hidden focus:outline-none">
+                <span class="hamburger-top"></span>
+                <span class="hamburger-middle"></span>
+                <span class="hamburger-bottom"></span>
+            </button>
+        </div>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-12 md:flex-row flex-col items-center">
+            <div
+                class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 from-blue-700 to-red-700">
+                    Ready to become
+                    <br class="hidden lg:inline-block">a PRO HOLDER?
+                </h1>
+                <p class="mb-8 leading-relaxed">I’m Spencer, a software designer and entrepreneur based in New York
+                    City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular
+                    people to explore space on their own terms.</p>
+                <div class="flex justify-center">
+                    <button
+                        class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+                    <button
+                        class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
+                </div>
+            </div>
+            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6" id="cards"></div>
+        </div>
+    </section>
+
+    <!-- SVG -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#6366F1" fill-opacity="1"
+            d="M0,160L40,144C80,128,160,96,240,96C320,96,400,128,480,160C560,192,640,224,720,240C800,256,880,256,960,234.7C1040,213,1120,171,1200,154.7C1280,139,1360,149,1400,154.7L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z">
+        </path>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#6366F1" fill-opacity="1"
+            d="M0,128L48,160C96,192,192,256,288,256C384,256,480,192,576,144C672,96,768,64,864,58.7C960,53,1056,75,1152,85.3C1248,96,1344,96,1392,96L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+        </path>
+    </svg>
+
+    <!-- Feature -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap w-full mb-20 flex-col items-center text-center">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Pitchfork Kickstarter
+                    Taxidermy</h1>
+                <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">Whatever cardigan tote bag tumblr hexagon
+                    brooklyn asymmetrical gentrify, subway tile poke farm-to-table.</p>
+            </div>
+            <div class="flex flex-wrap -m-4">
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Shooting Stars</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <circle cx="6" cy="6" r="3"></circle>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">The Catalyzer</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Neptune</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Melanchole</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Bunker</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 md:w-1/2 p-4">
+                    <div class="border border-gray-200 p-6 rounded-lg">
+                        <div
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Ramona Falls</h2>
+                        <p class="leading-relaxed text-base">Fingerstache flexitarian street art 8-bit waist co, subway
+                            tile poke farm.</p>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac
+                    Heirloom</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
+                    asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them
+                    man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+            </div>
+            <div class="flex flex-wrap -m-4 text-center">
+                <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+                    <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                        <img src="/images/figma-dynamic-color.png" alt="" srcset="">
+                        <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
+                        <p class="leading-relaxed">Downloads</p>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+                    <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                        <img src="/images/boy-dynamic-color.png" alt="" srcset="">
+                        <h2 class="title-font font-medium text-3xl text-gray-900">1.3K</h2>
+                        <p class="leading-relaxed">Users</p>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+                    <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                        <img src="/images/new-folder-dynamic-premium.png" alt="" srcset="">
+                        <h2 class="title-font font-medium text-3xl text-gray-900">74</h2>
+                        <p class="leading-relaxed">Files</p>
+                    </div>
+                </div>
+                <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+                    <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                        <img src="/images/map-pin-dynamic-premium.png" alt="">
+                        <h2 class="title-font font-medium text-3xl text-gray-900">46</h2>
+                        <p class="leading-relaxed">Places</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Card -->
+
+    <div class="containers">
+        <div class="container_terminal"></div>
+        <div class="terminal_toolbar">
+            <div class="butt">
+                <button class="btns btn-color"></button>
+                <button class="btns"></button>
+                <button class="btns"></button>
+            </div>
+            <p class="user">johndoe@admin: ~</p>
+        </div>
+        <div class="terminal_body">
+            <div class="terminal_promt">
+                <span class="terminal_user">johndoe@admin:</span>
+                <span class="terminal_location">~</span>
+                <span class="terminal_bling">$</span>
+                <span class="terminal_cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-20">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Our Team</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn
+                    asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.
+                </p>
+            </div>
+            <div class="flex flex-wrap -m-2">
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="./images/nate-totoy.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Holden Caulfield</h2>
+                            <p class="text-gray-500">UI Designer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/hacker.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Henry Letham</h2>
+                            <p class="text-gray-500">CTO</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/woman.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Oskar Blinde</h2>
+                            <p class="text-gray-500">Founder</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/icons8-user-100.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">John Doe</h2>
+                            <p class="text-gray-500">DevOps</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/Beard.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Martin Eden</h2>
+                            <p class="text-gray-500">Software Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/Male.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Boris Kitua</h2>
+                            <p class="text-gray-500">UX Researcher</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/Engineer.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Atticus Finch</h2>
+                            <p class="text-gray-500">QA Engineer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/PManager.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Alper Kamu</h2>
+                            <p class="text-gray-500">System</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
+                    <div class="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+                        <img alt="team"
+                            class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+                            src="/images/System.png">
+                        <div class="flex-grow">
+                            <h2 class="text-gray-900 title-font font-medium">Rodrigo Monchi</h2>
+                            <p class="text-gray-500">Product Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+                    <div class="h-full text-center" id="hero-left-content">
+                        <img alt="testimonial"
+                            class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
+                            src="/images/gamer.png">
+                        <p class="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki
+                            taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote
+                            bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                        <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                        <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
+                        <p class="text-gray-500">Senior Product Designer</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 lg:mb-0 mb-6 p-4">
+                    <div class="h-full text-center" id="hero-left-content">
+                        <img alt="testimonial"
+                            class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
+                            src="/images/hacker.png">
+                        <p class="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki
+                            taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote
+                            bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                        <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                        <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">ALPER KAMU</h2>
+                        <p class="text-gray-500">UI Develeoper</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 lg:mb-0 p-4">
+                    <div class="h-full text-center" id="hero-left-content">
+                        <img alt="testimonial"
+                            class="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
+                            src="/images/woman.png">
+                        <p class="leading-relaxed">Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki
+                            taxidermy 90's cronut +1 kinfolk. Single-origin coffee ennui shaman taiyaki vape DIY tote
+                            bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+                        <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-6 mb-4"></span>
+                        <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">HENRY LETHAM</h2>
+                        <p class="text-gray-500">CTO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Sign Up -->
+
+    <section id="cta" class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+            <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+                <h1 class="title-font font-medium text-3xl text-gray-900">Take your business to the next
+                    <span class="level"><strong>LEVEL</strong></span>
+                </h1>
+                <p class="leading-relaxed mt-4">We value your business as we value ourselves. We ensure top-quality
+                    class services in Digital Marketing since 2019.</p>
+            </div>
+            <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+                <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
+                <div class="relative mb-4">
+                    <label for="full-name" class="leading-7 text-sm text-gray-600">Full Name</label>
+                    <input type="text" id="full-name" name="full-name"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                </div>
+                <div class="relative mb-4">
+                    <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+                    <input type="email" id="email" name="email"
+                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                </div>
+                <button
+                    class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Count
+                    Me In!</button>
+                <p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="text-gray-600 body-font">
+        <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
+                    stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+                    viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                </svg>
+                <span class="ml-3 text-xl">Nate Corner</span>
+            </a>
+            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">©
+                2022 All Rights Reserved —
+                <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer"
+                    target="_blank">@natecorner</a>
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+                <a class="text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        class="w-5 h-5" viewBox="0 0 24 24">
+                        <path
+                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                        </path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                    </svg>
+                </a>
+                <a class="ml-3 text-gray-500">
+                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                        <path stroke="none"
+                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                        </path>
+                        <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+
+</html>
